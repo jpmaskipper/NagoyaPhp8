@@ -2,6 +2,10 @@
 
 namespace Skipper\Nagoya8;
 
+/**
+* NagoyaPhp Vol8
+* http://nabetani.sakura.ne.jp/hena/ord23snakemoinc/
+*/
 class Solve
 {
 	private $parser;
