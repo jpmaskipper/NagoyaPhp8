@@ -4,32 +4,32 @@ namespace Skipper\Nagoya8;
 
 class Router
 {
-	public function calculateMaxRoute(Map $map, Cell $cell)
+	public function calculate(Map $map)
 	{
-		$routes = $this->calculateRoute($map, [$cell]);
-		
-		$result = [];
-		foreach ($routes as $route) {
-			if (count($result) < count($route)) {
-				$result = $route;
-			}
+		$routes = [];
+		foreach ($map->getCells() as $cell) {
+			$routes[] = $this->calculateMaxRoute($map, $cell);
 		}
 
-		return $result;
+		return max($routes);
 	}
 
-	public function calculateRoute(Map $map, array $cells)
+	public function calculateMaxRoute(Map $map, Cell $cell)
+	{
+		return max($this->findRoute($map, [$cell]));
+	}
+
+	public function findRoute(Map $map, array $cells)
 	{
 		$results = [];
 
 		foreach ($map->getGraterCells(end($cells)) as $graterCell) {
 			$current = array_merge($cells, [$graterCell]);
-			$next = $this->calculateRoute($map, $current);
+			$next = $this->findRoute($map, $current);
 			$results = array_merge($results, $next);
 		}
 
 		return empty($results) ? [$cells] : $results;
 	}
 }
-
 

@@ -15,7 +15,8 @@ class Solve
 
 	public function run($path)
 	{
-		$route = $this->getRoute($path);
+		$map = $this->parser->parse($path);
+		$route = $this->router->calculate($map);
 
 		return count($route);
 	}
@@ -23,24 +24,9 @@ class Solve
 	public function getRoute($path)
 	{
 		$map = $this->parser->parse($path);
-		$route = $this->calculateMaxRoute($map);
+		$route = $this->router->calculate($map);
 
 		return $route;
 	}
-
-	public function calculateMaxRoute(Map $map)
-	{
-		$result = [];
-
-		foreach ($map->getCells() as $cell) {
-			$route = $this->router->calculateMaxRoute($map, $cell);
-
-			if (count($result) < count($route)) {
-				$result = $route;
-			}
-		}
-		
-		return $result;
-	}	
 }
 
