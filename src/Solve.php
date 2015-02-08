@@ -4,6 +4,15 @@ namespace Skipper\Nagoya8;
 
 class Solve
 {
+	private $parser;
+	private $route;
+
+	public function __construct(Parser $parser, Router $router)
+	{
+		$this->parser = $parser;
+		$this->router = $router;
+	}
+
 	public function run($path)
 	{
 		$route = $this->getRoute($path);
@@ -13,8 +22,7 @@ class Solve
 
 	public function getRoute($path)
 	{
-		$parser = new Parser();
-		$map = $parser->parse($path);
+		$map = $this->parser->parse($path);
 		$route = $this->calculateMaxRoute($map);
 
 		return $route;
@@ -22,11 +30,10 @@ class Solve
 
 	public function calculateMaxRoute(Map $map)
 	{
-		$router = new Router($map);
 		$result = [];
 
 		foreach ($map->getCells() as $cell) {
-			$route = $router->calculateMaxRoute($cell);
+			$route = $this->router->calculateMaxRoute($map, $cell);
 
 			if (count($result) < count($route)) {
 				$result = $route;

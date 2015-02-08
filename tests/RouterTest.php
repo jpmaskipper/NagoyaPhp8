@@ -14,8 +14,8 @@ class RouterTest extends \PHPUnit_Framework_TestCase
 		$mockMap = $this->getMock('Skipper\Nagoya8\Map');
 		$mockMap->expects($this->at(0))->method('getGraterCells')->will($this->returnValue([]));
 
-		$router = new Router($mockMap);
-		$route = $router->calculateRoute([$mockCell]);
+		$router = new Router();
+		$route = $router->calculateRoute($mockMap, [$mockCell]);
 		$this->assertCount(1, $route);
 		$this->assertCount(1, $route[0]);
 	}	
@@ -31,8 +31,8 @@ class RouterTest extends \PHPUnit_Framework_TestCase
 		$mockMap->expects($this->at(0))->method('getGraterCells')->will($this->returnValue([$mockCell]));
 		$mockMap->expects($this->at(1))->method('getGraterCells')->will($this->returnValue([]));
 
-		$router = new Router($mockMap);
-		$route = $router->calculateRoute([$mockCell]);
+		$router = new Router();
+		$route = $router->calculateRoute($mockMap, [$mockCell]);
 		$this->assertCount(1, $route);
 		$this->assertCount(2, $route[0]);
 	}	
@@ -49,8 +49,8 @@ class RouterTest extends \PHPUnit_Framework_TestCase
 		$mockMap->expects($this->at(1))->method('getGraterCells')->will($this->returnValue([$mockCell]));
 		$mockMap->expects($this->at(2))->method('getGraterCells')->will($this->returnValue([]));
 
-		$router = new Router($mockMap);
-		$route = $router->calculateRoute([$mockCell]);
+		$router = new Router();
+		$route = $router->calculateRoute($mockMap, [$mockCell]);
 		$this->assertCount(1, $route);
 		$this->assertCount(3, $route[0]);
 	}	
@@ -67,8 +67,8 @@ class RouterTest extends \PHPUnit_Framework_TestCase
 		$mockMap->expects($this->at(1))->method('getGraterCells')->will($this->returnValue([]));
 		$mockMap->expects($this->at(2))->method('getGraterCells')->will($this->returnValue([]));
 
-		$router = new Router($mockMap);
-		$route = $router->calculateRoute([$mockCell]);
+		$router = new Router();
+		$route = $router->calculateRoute($mockMap, [$mockCell]);
 		$this->assertCount(2, $route);
 		$this->assertCount(2, $route[0]);
 		$this->assertCount(2, $route[1]);
@@ -88,8 +88,8 @@ class RouterTest extends \PHPUnit_Framework_TestCase
 		$mockMap->expects($this->at(3))->method('getGraterCells')->will($this->returnValue([]));
 		$mockMap->expects($this->at(4))->method('getGraterCells')->will($this->returnValue([]));
 
-		$router = new Router($mockMap);
-		$route = $router->calculateRoute([$mockCell]);
+		$router = new Router();
+		$route = $router->calculateRoute($mockMap, [$mockCell]);
 		$this->assertCount(3, $route);
 		$this->assertCount(3, $route[0]);
 		$this->assertCount(3, $route[1]);
@@ -110,8 +110,8 @@ class RouterTest extends \PHPUnit_Framework_TestCase
 		$mockMap->expects($this->at(3))->method('getGraterCells')->will($this->returnValue([]));
 		$mockMap->expects($this->at(4))->method('getGraterCells')->will($this->returnValue([]));
 
-		$router = new Router($mockMap);
-		$route = $router->calculateMaxRoute($mockCell);
+		$router = new Router();
+		$route = $router->calculateMaxRoute($mockMap, $mockCell);
 		
 		$this->assertCount(3, $route);
 	}

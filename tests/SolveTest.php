@@ -8,7 +8,9 @@ class SolveTest extends \PHPUnit_Framework_TestCase
 
 	public function setup()
 	{
-		$this->solve = new Solve();
+		$parser = new Parser();
+		$router = new Router();
+		$this->solve = new Solve($parser, $router);
 	}
 
 	public function pathProvider()
